@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#git clone https://github.com/alxprd/docker-rpi-monitor.git
+#cd docker-rpi-monitor
+#docker build -t alxprd/rpi-monitor -f Dockerfile .
+
+docker run \
+    --device=/dev/vchiq \
+    --device=/dev/vcsm \
+    --volume=/opt/vc:/opt/vc \
+    --volume=/boot:/boot \
+    --volume=/sys:/dockerhost/sys:ro \
+    --volume=/etc:/dockerhost/etc:ro \
+    --volume=/proc:/dockerhost/proc:ro \
+    --volume=/usr/lib:/dockerhost/usr/lib:ro \
+    -p=8888:8888 \
+    --name="rpi-monitor" \
+    --rm -d  michaelmiklis/rpi-monitor
+#   --rm -d  alxprd/rpi-monitor:latest
